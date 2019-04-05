@@ -73,20 +73,20 @@ Source Code : [Soal2](Soal2/)
 ### Penjelasan
 Koneksi port harus dibedakan antara Pembeli dan Penjual
 - Server pembeli
-    1. Create socket.
-    2. Create thread untuk display stock.
-    3. Buat thread untuk meng-handle send-recv dengan client.
+    1. Membuat socket.
+    2. Membuat thread untuk display stock.
+    3. Membuat thread untuk meng-handle send-receive dengan client.
 - Server penjual
-    1. Create socket.
-    2. Create thread untuk meng-handle send-recv dengan client.
+    1. Membuat socket.
+    2. Membuat thread untuk meng-handle send-receive dengan client.
 - Client pembeli
-    1. Buat socket.
-    2. Connect ke server.
-    3. Handle send-recv dengan Server.
+    1. Membuat socket.
+    2. Menghubungkan dengan server.
+    3. Menangani send-receive dengan Server.
 - Client penjual
-    1. Buat socket.
-    2. Connect ke server.
-    3. Handle send-recv dengan Server.
+    1. Membuat socket.
+    2. Menghubungkan dengan server.
+    3. Menangani send-receive dengan Server.
 
 
 
@@ -297,5 +297,80 @@ Spesifikasi program:
 
 Source Code : [soal5](soal5/)
 
-### Jawab :
+### Penjelasan :
+- menyediakan fungsi untuk keypress
 
+	```
+	int mygetch(void)
+	{
+	    struct termios oldt, newt;
+	    int ch;
+	    tcgetattr( STDIN_FILENO, &oldt );
+	    newt = oldt;
+	    newt.c_lflag &= ~( ICANON | ECHO );
+	    tcsetattr( STDIN_FILENO, TCSANOW, &newt );
+	    ch = getchar();
+	    tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
+	    return ch;
+	}
+	```
+	
+- fungsi untuk menampilkan pilihan sesuai scene
+
+	```
+	void tampil(){
+	    while(1){
+		if (scene == 0) {
+		    printf("Standby Mode\n");
+		    printf("Health: %d \n", health_status);
+		    printf("Hunger: %d \n", hunger_status);
+		    printf("Hygiene: %d \n", hygiene_status);
+		    printf("Health: %d \n", health_status);
+		    printf("Food left : %d\n", my_food_stock);
+		    printf("Bath will be ready in %ds \n", cooldown);
+		    printf("Choiches\n");
+		    printf("1. Eat\n");
+		    printf("2. Bath\n");
+		    printf("3. Battle\n");
+		    printf("4. Shop\n");
+		    printf("5. Exit\n");
+		    scene = mygetch();
+		}
+
+		if (scene == 1){
+		    printf("Battle Mode\n");
+		    printf("Monster's Health: %d \n", health_status);
+		    printf("Monster's Health %d \n", hunger_status);
+		    printf("Choiches\n");
+		    printf("1. Attack\n");
+		    printf("2. Run\n");
+		}
+
+		if (scene == 2){
+		    printf("Shop Mode\n");
+		    printf("Shop Food Stock: %d \n", health_status);
+		    printf("Your Food Stock: %d \n", hunger_status);
+		    printf("Choiches\n");
+		    printf("1. Buy\n");
+		    printf("2. Back\n");
+		}
+
+		sleep(1);
+		//system("cls");
+	    }
+
+	}
+	```
+	
+- membuat fungsi untuk menjalankan mengurangi hunger_status setiap 10 detik
+	```
+	void hunger_kurang(){
+	    while(1){
+		if(1){
+		    hunger_status = hunger_status - 5;
+		    printf("hunger_status = %d\n", hunger_status);
+		    sleep(10);
+		}
+	    }
+	}
+	```
