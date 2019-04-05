@@ -1,6 +1,6 @@
 # SoalShift_modul3_D06
 
-## Soal 1
+## Soal 1 
 Buatlah program C yang bisa menghitung faktorial secara parallel lalu menampilkan hasilnya secara berurutan
 
 Contoh:
@@ -9,6 +9,8 @@ Contoh:
     3! = 6
     4! = 24
     5! = 120
+    
+Source Code : [Soal1.c](Soal1/soal.c)
 
 ### Jawab :
 
@@ -29,6 +31,7 @@ Pada suatu hari ada orang yang ingin berjualan 1 jenis barang secara private, di
 - Server penjual akan mencetak stok saat ini setiap 5 detik sekali
 - __Menggunakan thread, socket, shared memory__
 
+Source Code : [Soal2](Soal2/)
 
 ### Jawab :
 
