@@ -148,7 +148,7 @@ Spesifikasi program:
 
 - Pastikan terminal hanya mendisplay status detik ini sesuai scene terkait (hint: menggunakan system(“clear”))
 
-Source Code : [soal5](Soal5/)
+Source Code : [Soal5](soal5/)
 
 ### Jawab :
 
