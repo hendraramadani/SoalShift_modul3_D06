@@ -10,7 +10,7 @@ Contoh:
     4! = 24
     5! = 120
     
-Source Code : [Soal1.c](Soal1/soal.c)
+Source Code : [Soal1](Soal1/soal.c)
 
 ### Jawab :
 
@@ -59,6 +59,7 @@ Agmal dan Iraj merupakan 2 sahabat yang sedang kuliah dan hidup satu kostan, say
     - Spirit_Status Iraj <= 0 (Tampilkan Pesan “Iraj ikut tidur, dan bangun kesiangan bersama Agmal”)
 - __Syarat Menggunakan Lebih dari 1 Thread__
 
+Source Code : [Soal3](Soal3/)
 
 ### Jawab :
 
@@ -73,7 +74,7 @@ __Dengan Syarat__ :
 - Wajib Menggunakan Multithreading
 - Boleh menggunakan system
 
-
+Source Code : [Soal4](Soal4/)
 
 ### Jawab :
 
@@ -147,6 +148,7 @@ Spesifikasi program:
 
 - Pastikan terminal hanya mendisplay status detik ini sesuai scene terkait (hint: menggunakan system(“clear”))
 
+Source Code : [Soal5](Soal5/)
 
 ### Jawab :
 
