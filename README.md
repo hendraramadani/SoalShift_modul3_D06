@@ -50,6 +50,8 @@ void* tulis(void* args){
    printf("\n");
 }
 ```
+
+
 ## soal 2 <a name="soal_2"></a>
 Pada suatu hari ada orang yang ingin berjualan 1 jenis barang secara private, dia memintamu membuat program C dengan spesifikasi sebagai berikut:
 
@@ -86,6 +88,8 @@ Koneksi port harus dibedakan antara Pembeli dan Penjual
     2. Connect ke server.
     3. Handle send-recv dengan Server.
 
+
+
 ## Soal 3 
 Agmal dan Iraj merupakan 2 sahabat yang sedang kuliah dan hidup satu kostan, sayangnya mereka mempunyai gaya hidup yang berkebalikan, dimana Iraj merupakan laki-laki yang sangat sehat,rajin berolahraga dan bangun tidak pernah kesiangan sedangkan Agmal hampir menghabiskan setengah umur hidupnya hanya untuk tidur dan ‘ngoding’. Dikarenakan mereka sahabat yang baik, Agmal dan iraj sama-sama ingin membuat satu sama lain mengikuti gaya hidup mereka dengan cara membuat Iraj sering tidur seperti Agmal, atau membuat Agmal selalu bangun pagi seperti Iraj. Buatlah suatu program C untuk menggambarkan kehidupan mereka dengan spesifikasi sebagai berikut:
 
@@ -113,6 +117,62 @@ Agmal dan Iraj merupakan 2 sahabat yang sedang kuliah dan hidup satu kostan, say
 Source Code : [Soal3](Soal3/)
 
 ### Penjelasn
+1. Create thread untuk menghandle Agmal.
+```
+void* t_Agmal(void* args){
+	while(1){
+		if(strcmp(dsblfitur,"Agmal Ayo Bangun disabled 10 s")==0 && sleepcount==3){
+			printf("Disable : Agmal Ayo Bangun (10 Sec)\n");
+			sleep(10);
+			agflag=0;
+			sleepcount=0;
+			printf("Enable : Agmal Ayo Bangun\n");
+		}else{
+			if(agflag==1){
+				wakecount++;
+				wakeup_status+=15;
+				if(wakecount>3){
+					wakecount=1;
+				}
+				if(wakecount==3){
+					memset(dsblfitur,0,30);
+					strcpy(dsblfitur,"Fitur Iraj Ayo Tidur disabled 10 s");
+				}
+			agflag=0;
+			}
+		}	
+	}
+}
+```
+2. Create thread untuk menghandle Iraj.
+```
+void* t_Iraj(void* args){
+	while(1){
+		if(strcmp(dsblfitur,"Fitur Iraj Ayo Tidur disabled 10 s")==0 && wakecount==3){
+			printf("Disable : Iraj Ayo Tidur (10 Sec)\n");
+			sleep(10);
+			irflag=0;
+			wakecount=0;
+			printf("Enable : Iraj Ayo Tidur\n");
+		}else{
+			if(irflag==1){
+				sleepcount++;
+				spirit_status-=20;
+				if(sleepcount>3){	
+					sleepcount=1;
+				}
+				if(sleepcount==3){
+					memset(dsblfitur,0,30);
+					strcpy(dsblfitur,"Agmal Ayo Bangun disabled 10 s");
+				}
+			irflag=0;
+			}
+		}	
+	}
+}
+```
+3. Create loop untuk untuk menghandle input user.
+
 
 
 ## Soal 4
@@ -128,9 +188,44 @@ __Dengan Syarat__ :
 
 Source Code : [Soal4](Soal4/)
 
-### Jawab :
-
-
+### Penjelasan
+1. Membuat thread untuk menjalankan semua proses yang telah disebutkan
+2. Membuat Direktori FolderProses1 dan Folder Proses2
+```
+    sprintf(command,"mkdir ~/Documents/FolderProses%d",extract->proc);
+    system(command);
+```
+3. Menyimpan Lis proses pada ``ps -aux`` ,hanya 10 proses yang dilist dan disimpan dengan nama SimpanProses1.txt dan SimpanProses2.txt
+```
+    strcpy(command,"");
+    sprintf(command,"ps aux --no-heading | head -%d  | tail -%d > ~/Documents/FolderProses%d/SimpanProses%d.txt",extract->high,extract->low,extract->proc,extract->proc);
+    system(command);
+```
+4. Mengkompres file SimpanProses1.txt dan SimpanProses2.txt Menjadi KompresProses1.zip dan KompresProses2.zip, lalu menghapus file SimpanProses1.txt dan SimpanProses2.txt yang sudah di kompress tadi
+```
+    strcpy(command,"");
+    sprintf(command,"zip -qmj ~/Documents/FolderProses%d/KompresProses%d ~/Documents/FolderProses%d/SimpanProses%d.txt",extract->proc,extract->proc,extract->proc,extract->proc);
+    system(command);
+```
+5. Setalah Proses Kompres, lalu sleep selama 15 detik
+```
+  printf("Tunggu 15 Detik Untuk Unzip\n");
+  for(int i=1; i<=15;i++){
+	printf("%d\n",i);
+	sleep(1);
+  }
+```
+6. Create thread unzip, Setalah itu Mengunzip file KompresProses1.zip dan KompresProses2.zip
+```
+void* unzip(void* args){
+    char command[100];
+    struct Order*extract =(struct Order*)args;
+    strcpy(command,"");
+    sprintf(command,"unzip -qd ~/Documents/FolderProses%d ~/Documents/FolderProses%d/KompresProses%d.zip",extract->proc,extract->proc,extract->proc);
+    //printf("%s",command);
+    system(command);
+} 
+```
 ## Soal 5
 Angga, adik Jiwang akan berulang tahun yang ke sembilan pada tanggal 6 April besok. Karena lupa menabung, Jiwang tidak mempunyai uang sepeserpun untuk membelikan Angga kado. Kamu sebagai sahabat Jiwang ingin membantu Jiwang membahagiakan adiknya sehingga kamu menawarkan bantuan membuatkan permainan komputer sederhana menggunakan program C. Jiwang sangat menyukai idemu tersebut. Berikut permainan yang Jiwang minta. 
 - Pemain memelihara seekor monster lucu dalam permainan. Pemain dapat  memberi nama pada monsternya.
