@@ -69,7 +69,22 @@ Pada suatu hari ada orang yang ingin berjualan 1 jenis barang secara private, di
 Source Code : [Soal2](Soal2/)
 
 ### Penjelasan
-
+Koneksi port harus dibedakan antara Pembeli dan Penjual
+- Server pembeli
+    1. Create socket.
+    2. Create thread untuk display stock.
+    3. Buat thread untuk meng-handle send-recv dengan client.
+- Server penjual
+    1. Create socket.
+    2. Create thread untuk meng-handle send-recv dengan client.
+- Client pembeli
+    1. Buat socket.
+    2. Connect ke server.
+    3. Handle send-recv dengan Server.
+- Client penjual
+    1. Buat socket.
+    2. Connect ke server.
+    3. Handle send-recv dengan Server.
 
 ## Soal 3 
 Agmal dan Iraj merupakan 2 sahabat yang sedang kuliah dan hidup satu kostan, sayangnya mereka mempunyai gaya hidup yang berkebalikan, dimana Iraj merupakan laki-laki yang sangat sehat,rajin berolahraga dan bangun tidak pernah kesiangan sedangkan Agmal hampir menghabiskan setengah umur hidupnya hanya untuk tidur dan ‘ngoding’. Dikarenakan mereka sahabat yang baik, Agmal dan iraj sama-sama ingin membuat satu sama lain mengikuti gaya hidup mereka dengan cara membuat Iraj sering tidur seperti Agmal, atau membuat Agmal selalu bangun pagi seperti Iraj. Buatlah suatu program C untuk menggambarkan kehidupan mereka dengan spesifikasi sebagai berikut:
@@ -97,7 +112,8 @@ Agmal dan Iraj merupakan 2 sahabat yang sedang kuliah dan hidup satu kostan, say
 
 Source Code : [Soal3](Soal3/)
 
-### Jawab :
+### Penjelasn
+
 
 ## Soal 4
 Buatlah sebuah program C dimana dapat menyimpan list proses yang sedang berjalan (ps -aux) maksimal 10 list proses. Dimana awalnya list proses disimpan dalam di 2 file ekstensi .txt yaitu  SimpanProses1.txt di direktori /home/Document/FolderProses1 dan SimpanProses2.txt di direktori /home/Document/FolderProses2 , setelah itu masing2 file di  kompres zip dengan format nama file KompresProses1.zip dan KompresProses2.zip dan file SimpanProses1.txt dan SimpanProses2.txt akan otomatis terhapus, setelah itu program akan menunggu selama 15 detik lalu program akan mengekstrak kembali file KompresProses1.zip dan KompresProses2.zip 
