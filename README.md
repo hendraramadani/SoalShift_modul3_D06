@@ -295,7 +295,7 @@ Spesifikasi program:
 
 - Pastikan terminal hanya mendisplay status detik ini sesuai scene terkait (hint: menggunakan system(“clear”))
 
-Source Code : [soal5](soal5/)
+Source Code : [soal5](soal 5/)
 
 ### Penjelasan :
 - menyediakan fungsi untuk keypress
