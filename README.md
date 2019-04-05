@@ -12,9 +12,44 @@ Contoh:
     
 Source Code : [Soal1](Soal1/)
 
-### Jawab :
+### Penjelasan
+1. setiap inputan dimasukkan dalam array
+```  do {
 
+      scanf("%d%c", &arr[i], &temp);
 
+      i++;
+
+  } while(temp != '\n');
+```
+2. lalu array disort
+```
+ for (i = 0; arr[i]!='\0'; ++i) 
+        {
+            for (j = i + 1; arr[j]!='\0'; ++j)
+            {
+                if (arr[i] > arr[j]) 
+                {
+                    x =  arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = x;
+                }
+            }     
+        }
+```
+3. setiap elemen array dicari faktorialnya dengan cara menggunakan thread, satu elemen array satu thread, perhitungan faktorial dilalkukan di dalam thread
+```
+void* tulis(void* args){
+    unsigned long long fctr=1;
+    struct Factorial*extract =(struct Factorial*)args;
+	for(int i=1; i<=extract->val; ++i)
+        {
+            fctr = i*fctr;          
+        }
+    printf("[ Thread %d sukses dibuat | %d! Factorial = %llu ]\n",extract->val,extract->val,fctr);
+   printf("\n");
+}
+```
 ## soal 2 <a name="soal_2"></a>
 Pada suatu hari ada orang yang ingin berjualan 1 jenis barang secara private, dia memintamu membuat program C dengan spesifikasi sebagai berikut:
 
@@ -33,7 +68,8 @@ Pada suatu hari ada orang yang ingin berjualan 1 jenis barang secara private, di
 
 Source Code : [Soal2](Soal2/)
 
-### Jawab :
+### Penjelasan
+
 
 ## Soal 3 
 Agmal dan Iraj merupakan 2 sahabat yang sedang kuliah dan hidup satu kostan, sayangnya mereka mempunyai gaya hidup yang berkebalikan, dimana Iraj merupakan laki-laki yang sangat sehat,rajin berolahraga dan bangun tidak pernah kesiangan sedangkan Agmal hampir menghabiskan setengah umur hidupnya hanya untuk tidur dan ‘ngoding’. Dikarenakan mereka sahabat yang baik, Agmal dan iraj sama-sama ingin membuat satu sama lain mengikuti gaya hidup mereka dengan cara membuat Iraj sering tidur seperti Agmal, atau membuat Agmal selalu bangun pagi seperti Iraj. Buatlah suatu program C untuk menggambarkan kehidupan mereka dengan spesifikasi sebagai berikut:
