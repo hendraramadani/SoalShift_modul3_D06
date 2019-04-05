@@ -10,7 +10,7 @@ Contoh:
     4! = 24
     5! = 120
     
-Source Code : [Soal1](Soal1/soal.c)
+Source Code : [Soal1](Soal1/)
 
 ### Jawab :
 
