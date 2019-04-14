@@ -295,9 +295,12 @@ Spesifikasi program:
 
 - Pastikan terminal hanya mendisplay status detik ini sesuai scene terkait (hint: menggunakan system(“clear”))
 
-Source Code : [soal5](soal 5/)
+Source Code : 	[soal5_game](soal5/soal5_game.c)
+		[soal5_game](soal5/soal5_shop.c)
 
 ### Penjelasan :
+
+#### Soal5_game.c
 - menyediakan fungsi untuk keypress
 
 	```
@@ -556,3 +559,66 @@ Source Code : [soal5](soal 5/)
 	```
 
 Pada fungsi main ini kita menggunakan 4 thread yakni untuk menjalankan fungsi hunger, hygiene, hitungwaktu dan health dikarenakan keempat fungsi ini berubah pada setiap waktunya. Dan untuk standby mode kit gunakan pemanggilan fungsi seperti biasanya.
+
+#### Soal5_shop.c
+
+- fungsi untuk keypress
+
+	```
+	int mygetch(void)
+	{
+		struct termios oldt, newt;
+		int ch;
+		tcgetattr( STDIN_FILENO, &oldt );
+		newt = oldt;
+		newt.c_lflag &= ~( ICANON | ECHO );
+		tcsetattr( STDIN_FILENO, TCSANOW, &newt );
+		ch = getchar();
+		tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
+		return ch;
+	}
+	```
+
+- fungsi untuk mencetak secara realtime (tiap detiknya)
+
+	```
+	void* printku(void *arg){
+		while(1) {
+			printf("Shop\n");
+			printf("Food stock : %d\n", *shop_food_stock);
+			printf("Choices\n");
+			printf("1. Restock\n");
+			printf("2. Exit\n");
+			sleep(1);
+			system("clear");
+		}
+	}
+	```
+	
+- fungsi main di soal5_shop.c
+
+	```
+	int main(void) {
+	    key_t key = 1234;
+	    char pilihan;
+	    int shmid = shmget(key, sizeof(int), IPC_CREAT | 0666);
+	    shop_food_stock = shmat(shmid, NULL, 0);
+	    system("clear");
+
+	    pthread_create(&tid, NULL, &printku, NULL);
+
+	    while(1){
+		pilihan = mygetch();
+		if(pilihan=='1') *shop_food_stock = *shop_food_stock + 1;
+		else if(pilihan=='2') {
+		    printf("Exit\n");
+		    sleep(1);
+		    exit(-1);
+		    system("clear");
+		}
+	    }
+	    system("clear");
+	}
+	```
+	
+Pada fungsi main di shop kit menerapkan shared memory yang juga ada di fungsi main soal5_game.c dan agar bisa menampilkan stok pada saat itu secara otomatis maka di sini kami menggunakan thread untuk fungsi printku untuk melakukannya.
